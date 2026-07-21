@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>DELE B1 考试完全指南</title>
+<style>
+  :root{
+    --rojo:#e2536b;
+    --rojo-suave:#fdf1f3;
+    --naranja:#f2a154;
+    --naranja-suave:#fef6ec;
+    --azul:#5b9bd5;
+    --azul-suave:#eef5fc;
+    --verde:#6fbf9b;
+    --verde-suave:#eef9f4;
+    --morado:#a48add;
+    --morado-suave:#f5f1fb;
+    --gris:#828892;
+    --gris-claro:#f7f8f9;
+    --texto:#2c2f34;
+    --borde:#eceef1;
+    --ambar:#e8a33d;
+    --ambar-suave:#fff3dc;
+    --ambar-fuerte:#b8720f;
+  }
+  *{box-sizing:border-box;}
+  html, body{width:100%;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:#ffffff;
+    color:var(--texto);
+    line-height:1.7;
+    overflow-x:hidden;
+    padding:0 150px;
+  }
+  .page{display:flex;width:100%;max-width:none;margin:0 auto;align-items:flex-start;}
+  .wrap{flex:1;min-width:0;padding:32px 24px 80px 24px;max-width:none;}
+
+  /* right nav */
+  .navbar{
+    width:170px;position:fixed;top:24px;right:0;
+    transform:translateX(136px);
+    transition:transform 0.25s ease;
+    margin:0;padding:10px 10px 12px 10px;
+    border:1px solid var(--borde);border-radius:14px 0 0 14px;
+    background:#fcfcfd;
+    max-height:calc(100vh - 48px);overflow-y:auto;z-index:999;
+    box-shadow:-4px 4px 20px rgba(0,0,0,0.08);
+  }
+  .navbar:hover{transform:translateX(0);}
+  .navbar .nav-title{font-size:11px;color:var(--gris);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;font-weight:700;}
+  .navbar a{
+    display:block;font-size:12.5px;color:var(--texto);text-decoration:none;
+    padding:6px 10px;border-radius:8px;margin-bottom:2px;
+    border-left:3px solid transparent;
+    opacity:0;transition:opacity 0.2s ease 0.05s;
+  }
+  .navbar:hover a{opacity:1;}
+  .navbar:hover .nav-title{opacity:1;}
+  .navbar .nav-title{opacity:0;transition:opacity 0.2s ease 0.05s;}
+  .navbar a:hover{background:var(--rojo-suave);color:var(--rojo);}
+  .navbar a.sub{font-size:11.5px;color:var(--gris);padding-left:18px;}
+  .navbar a.sub:hover{color:var(--rojo);}
+  @media(max-width:1000px){
+    .navbar{display:none;}
+  }
+
+  /* Header - naranja amarilla (ámbar) */
+  .hero{
+    background:linear-gradient(135deg,#fff8e8 0%,#fef3d9 100%);
+    color:var(--texto);
+    border-radius:20px;
+    padding:38px 36px;
+    margin-bottom:36px;
+    border:1px solid #f5e2b0;
+  }
+  .hero .tag{
+    display:inline-block;background:#ffffffaa;color:var(--ambar-fuerte);
+    padding:4px 14px;border-radius:20px;font-size:12.5px;letter-spacing:1px;
+    margin-bottom:14px;font-weight:600;
+  }
+  .hero h1{margin:0 0 8px;font-size:30px;font-weight:800;color:var(--ambar-fuerte);}
+  .hero p{margin:0;font-size:14.5px;color:var(--gris);max-width:640px;}
+
+  h2.section-title{
+    display:flex;align-items:center;gap:12px;
+    font-size:21px;margin:52px 0 20px;
+    padding-bottom:10px;border-bottom:2px solid var(--borde);
+    color:var(--texto);
+    scroll-margin-top:20px;
+  }
+
+  /* Specific spacing for the "分数折算与通过要求" section */
+  h2.section-title#calificacion{margin:100px 0 0 !important;}
+  h2#calificacion ~ h3.sub-title{margin:15px 0 8px;}
+  h3.sub-title.no-top-gap{margin-top:31px !important;margin-bottom:4px;}
+  h3.sub-title.large-top-gap{margin-top:50px !important;margin-bottom:8px;}
+
+  h2#calificacion ~ h3.sub-title + .callout,
+  h2#calificacion ~ h3.sub-title + p,
+  h2#calificacion ~ h3.sub-title + .formula,
+  h2#calificacion ~ h3.sub-title + ul{margin-top:4px;margin-bottom:0;}
+  h2.section-title .num{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--naranja-suave);color:var(--naranja);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;flex-shrink:0;font-weight:700;
+  }
+  h3.sub-title{font-size:20px;margin:80px 0 24px;color:var(--texto);display:flex;align-items:center;gap:8px;scroll-margin-top:20px;}
+  h3.sub-title#lectura{margin:0 0 24px;}
+
+  /* CEFR ladder */
+  .ladder{display:flex;flex-direction:column;gap:8px;margin:20px 0;}
+  .ladder details{margin-top:6px;}
+  .ladder summary{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--borde);background:var(--gris-claro);color:var(--texto);font-size:13px;cursor:pointer;list-style:none;}
+  .ladder summary::-webkit-details-marker{display:none;}
+  .ladder .toggle-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--borde);background:#fff;font-size:12px;transition:transform 0.2s ease;}
+  .ladder details[open] .toggle-icon{transform:rotate(180deg);}
+  .ladder .hidden-rungs{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+  .rung{
+    display:flex;align-items:center;gap:14px;
+    padding:12px 16px;border-radius:10px;border:1px solid var(--borde);
+    background:#fff;
+  }
+  .rung.active{
+    background:var(--naranja-suave);border-color:#f5e8d9;
+  }
+  .rung .lvl{
+    width:40px;height:40px;border-radius:10px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:#a9adb3;font-size:14px;background:var(--gris-claro);
+  }
+  .rung.active .lvl{background:var(--naranja);color:#fff;}
+  .rung .desc{font-size:13.5px;color:var(--gris);}
+  .rung.active .desc{color:var(--texto);font-weight:500;}
+
+  /* overview cards grid - light & fresh */
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0;}
+  @media(max-width:800px){.grid4{grid-template-columns:repeat(2,1fr);}}
+  .prueba-card{
+    border-radius:16px;padding:20px 18px;background:#fff;
+    border:1px solid var(--borde);
+    position:relative;
+  }
+  .prueba-card .icon{
+    width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;margin-bottom:12px;
+  }
+  .prueba-card .prueba-label{font-size:11.5px;color:var(--gris);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;}
+  .prueba-card .title{font-size:16px;font-weight:800;margin:2px 0 10px;}
+  .prueba-card .meta{font-size:12.5px;color:var(--gris);line-height:1.6;}
+  .prueba-card .meta b{color:var(--texto);}
+  .nowrap-text{white-space:nowrap;}
+  .p1 .icon{background:var(--azul-suave);}
+  .p2 .icon{background:var(--verde-suave);}
+  .p3 .icon{background:var(--naranja-suave);}
+  .p4 .icon{background:var(--morado-suave);}
+  .p1 .title{color:#4a86c2;}
+  .p2 .title{color:#4f9e79;}
+  .p3 .title{color:#d68a3c;}
+  .p4 .title{color:#8a6cc4;}
+  .p1{border-top:3px solid var(--azul);}
+  .p2{border-top:3px solid var(--verde);}
+  .p3{border-top:3px solid var(--naranja);}
+  .p4{border-top:3px solid var(--morado);}
+
+  /* task card */
+  .tarea{
+    border:1px solid var(--borde);border-radius:14px;
+    padding:18px 20px;margin-bottom:14px;background:#fff;
+    scroll-margin-top:20px;
+  }
+  .tarea{position:relative;}
+  .tarea .head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;position:relative;z-index:1;padding:16px 18px 14px;border-radius:12px 12px 0 0;background:#fff;}
+  .tarea .head::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:12px 12px 0 0;opacity:0.12;}
+  .tarea .head .chip{
+    font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);
+  }
+  .tarea .head .titulo{font-weight:700;font-size:15px;}
+  .tarea .head .items{margin-left:auto;font-size:12px;color:var(--gris);background:var(--gris-claro);padding:3px 10px;border-radius:20px;}
+  .tarea.tarea-p1 .head::before{background:var(--azul);}
+  .tarea.tarea-p2 .head::before{background:var(--verde);}
+  .tarea.tarea-p3 .head::before{background:var(--naranja);}
+  .tarea.tarea-p4 .head::before{background:var(--morado);}
+  .tarea.tarea-p1 .lab{color:var(--azul);}
+  .tarea.tarea-p2 .lab{color:var(--verde);}
+  .tarea.tarea-p3 .lab{color:var(--naranja);}
+  .tarea.tarea-p4 .lab{color:var(--morado);}
+  .tarea .row{display:block;margin-top:8px;}
+  .tarea .col{width:100%;min-width:0;font-size:13.5px;margin-bottom:10px;line-height:1.5;padding-left:30px;}
+  .tarea .col:last-child{margin-bottom:0;}
+  .tarea .col .lab{display:inline;font-size:13.5px;color:var(--gris);text-transform:uppercase;letter-spacing:0.5px;margin-right:8px;font-weight:700;}
+
+  .chip-p1{background:var(--azul-suave);color:#4a86c2;}
+  .chip-p2{background:var(--verde-suave);color:#4f9e79;}
+  .chip-p3{background:var(--naranja-suave);color:#d68a3c;}
+  .chip-p4{background:var(--morado-suave);color:#8a6cc4;}
+  .tarea .head.chip-bg-p1::before{background:var(--azul);}
+  .tarea .head.chip-bg-p2::before{background:var(--verde);}
+  .tarea .head.chip-bg-p3::before{background:var(--naranja);}
+  .tarea .head.chip-bg_p4::before{background:var(--morado);}
+  .tarea.tarea-p1 .col .lab{color:var(--azul);}
+  .tarea.tarea-p2 .col .lab{color:var(--verde);}
+  .tarea.tarea-p3 .col .lab{color:var(--naranja);}
+  .tarea.tarea-p4 .col .lab{color:var(--morado);}
+
+    /* original exam pdf image box */
+  .original{
+    margin-top:14px;border-radius:12px;overflow:hidden;
+    border:1px solid var(--borde);background:var(--gris-claro);
+  }
+  .original .tag-orig{
+    background:#fff;color:var(--gris);border-bottom:1px solid var(--borde);
+    font-size:11px;font-weight:700;letter-spacing:0.5px;
+    padding:8px 14px;text-transform:uppercase;
+  }
+  .original .imgs{
+    display:flex;gap:10px;padding:14px;overflow-x:auto;justify-content:center;
+  }
+  .original .imgs img{
+    width:220px;max-width:45%;height:auto;border-radius:6px;
+    border:1px solid #e6e6e6;box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    background:#fff;cursor:zoom-in;
+  }
+  .original .imgs .pdf-scan{
+    width:220px;max-width:45%;height:310px;border-radius:6px;
+    border:1px solid #e6e6e6;box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    background:#fff;
+  }
+  @media(max-width:640px){
+    .original .imgs img{max-width:80%;}
+    .original .imgs .pdf-scan{max-width:80%;}
+  }
+
+
+  /* per-tarea rubric box (writing) */
+  .rubric-box{
+    margin-top:14px;border-radius:12px;overflow:hidden;
+    border:1px solid var(--borde);
+  }
+  .rubric-box .tag-rubric{
+    background:#fff;color:var(--gris);border-bottom:1px solid var(--borde);
+    font-size:11px;font-weight:700;letter-spacing:0.5px;
+    padding:8px 14px;text-transform:uppercase;
+  }
+  .rubric-box table{width:100%;border-collapse:collapse;font-size:13px;}
+  .rubric-box td{padding:11px 14px;border-bottom:1px solid var(--borde);vertical-align:top;line-height:1.65;}
+  .rubric-box tr:last-child td{border-bottom:none;}
+  .rubric-box td.pts{width:118px;font-weight:700;white-space:nowrap;font-size:13px;}
+  .rubric-box tr.b3{background:var(--verde-suave);}
+  .rubric-box tr.b2{background:var(--azul-suave);}
+  .rubric-box tr.b1{background:var(--naranja-suave);}
+  .rubric-box tr.b0{background:var(--rojo-suave);}
+  .rubric-box tr.b3 td.pts{color:#3f8f6c;}
+  .rubric-box tr.b2 td.pts{color:#3f74ab;}
+  .rubric-box tr.b1 td.pts{color:#c17c2e;}
+  .rubric-box tr.b0 td.pts{color:#c14257;}
+  .rubric-box .subhead{
+    padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--texto);
+    background:#fbfbfc;border-bottom:1px solid var(--borde);border-top:1px solid var(--borde);
+  }
+  .rubric-box .subhead:first-of-type{border-top:none;}
+  .rubric-box .subhead .who{font-weight:400;color:var(--gris);font-size:11.5px;}
+
+  /* weight table (speaking) */
+  .weight-box{
+    margin-top:18px;border-radius:12px;overflow:hidden;border:1px solid var(--borde);
+  }
+  .weight-box .tag-rubric{
+    background:#fff;color:var(--gris);border-bottom:1px solid var(--borde);
+    font-size:11px;font-weight:700;letter-spacing:0.5px;
+    padding:8px 14px;text-transform:uppercase;
+  }
+  table.weight{width:100%;border-collapse:collapse;font-size:13px;}
+  table.weight th{background:var(--gris-claro);color:var(--texto);padding:9px 12px;text-align:center !important;font-weight:700;font-size:12px;}
+  table.weight td{padding:9px 12px;text-align:center;border-bottom:1px solid var(--borde);border-right:1px solid var(--borde);}
+  table.weight td:last-child, table.weight th:last-child{border-right:none;}
+  table.weight td.rowlab{text-align:center !important;font-weight:700;background:var(--gris-claro);vertical-align:middle;line-height:1.5;}
+  table.weight td.total{font-weight:800;background:var(--morado-suave);color:#8a6cc4;}
+  table.weight th.total{background:var(--morado-suave);color:#8a6cc4;}
+
+  /* summary strip */
+  .strip{
+    display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 24px;
+  }
+  .strip .item{
+    flex:1;min-width:130px;background:var(--gris-claro);
+    border-radius:10px;padding:12px 14px;text-align:center;
+  }
+  .strip .item .v{font-size:19px;font-weight:800;color:var(--texto);}
+  .strip .item .k{font-size:11px;color:var(--gris);margin-top:2px;}
+
+  /* scoring table */
+  table.score{width:100%;border-collapse:collapse;margin:14px 0 24px;font-size:13.5px;}
+  table.score th{background:var(--gris-claro);color:var(--texto);padding:10px 12px;text-align:left;font-weight:700;}
+  table.score td{padding:10px 12px;border-bottom:1px solid var(--borde);}
+  .band3{border-left:4px solid var(--verde);}
+  .band2{border-left:4px solid var(--azul);}
+  .band1{border-left:4px solid var(--naranja);}
+  .band0{border-left:4px solid var(--rojo);}
+
+  .formula{
+    background:var(--rojo-suave);border:1px dashed #f6d9de;
+    border-radius:12px;padding:16px 50px;font-size:14px;text-align:left;display:table;margin:16px auto;}
+  .formula .f{text-align:center;font-weight:800;font-size:16px;margin:8px 0;color:var(--rojo) !important;}
+  .formula > div{padding:0;margin:0;color:var(--black);}
+  .formula .f{font-size:17px;font-weight:800;margin:6px 0;color:var(--rojo) !important;}
+
+  .callout{
+    border-radius:12px;padding:14px 18px;margin:16px 0;font-size:13.5px;
+  }
+  .callout.green{background:var(--verde-suave);border:1px solid #d3ede1;}
+  .callout.red{background:#fff7cc;border:1px solid #f2e6a8;color:var(--texto);padding:8px 18px;margin:12px 0 16px;}
+  .callout-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;color:var(--texto);}
+  .callout-icon{display:inline-block;width:22px;text-align:center;flex:0 0 22px;}
+  .callout-title{font-weight:800;font-size:14px !important;}
+  .callout-body{margin-left:28px;}
+  .callout.gray{background:var(--gris-claro);border:1px solid var(--borde);}
+
+  ul.plain{padding-left:20px;margin:8px 0;}
+  ul.plain li{margin-bottom:4px;font-size:13.5px;}
+
+  .footer-note{
+    margin-top:60px;padding-top:20px;border-top:1px solid var(--borde);
+    font-size:12px;color:var(--gris);text-align:center;
+  }
+
+  /* layout Grupo as two columns; callout below will sit on its own row */
+  .group-row{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:12px;margin-bottom:12px;}
+  .group-box{
+    border-radius:16px;padding:20px;margin-bottom:16px;box-sizing:border-box;
+    width:100%;
+  }
+  @media (max-width:800px){
+    .group-row{grid-template-columns:1fr;}
+  }
+  .group-plus{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:var(--texto);grid-row:1;grid-column:1/3;}
+  @media (max-width:800px){.group-plus{grid-column:auto;}}
+
+  .callout.red{background:#fff7cc;border:1px solid #f2e6a8;color:var(--texto);}
+  .group1{background:var(--azul-suave);border:1px solid #dcebf8;}
+  .group2{background:var(--verde-suave);border:1px solid #d3ede1;}
+  .group-box h4{margin:0 0 10px;font-size:15px;}
+  .group-box .bars{display:flex;gap:10px;}
+  .group-box .bar{flex:1;background:#fff;border-radius:10px;padding:10px;text-align:center;}
+  .group-box .bar .n{font-size:18px;font-weight:800;}
+  .group-box .bar .t{font-size:11px;color:var(--gris);}
+
+  /* lightbox */
+  #lightbox{
+    display:none;position:fixed;inset:0;background:rgba(20,20,22,0.82);
+    z-index:999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out;
+  }
+  #lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.4);}
+</style>
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="wrap">
+
+  <div class="hero">
+    <span class="tag">Instituto Cervantes · Guía oficial</span>
+    <h1>DELE B1 考试完全指南</h1>
+    <p>本指南根据 Instituto Cervantes 官方《Guía del examen DELE B1》整理，<br>
+    按照「整体水平 → 考试结构 → 各部分详细题型 → 评分标准」的顺序编排。</p>
+  </div>
+
+  <!-- 1. Nivel general -->
+  <h2 class="section-title" id="nivel"><span class="num">1</span>DELE B1 级别能力要求（CEFR）</h2>
+  <p style="font-size:13.5px;color:var(--gris)">DELE 共有六个等级，B1（Umbral，「门槛级」）是承上启下的中级水平。根据塞万提斯学院官方大纲，各等级水平的语言能力如下：</p>
+  <div class="ladder">
+    <div class="rung">
+      <div class="lvl">A2</div>
+      <div class="desc">基础交际能力。能理解和使用与切身相关领域（自身及家庭信息、购物、周边环境、工作等）的常用高频表达，能就熟悉话题进行简单直接的信息交流。</div>
+    </div>
+    <div class="rung active">
+      <div class="lvl">B1</div>
+      <div class="desc"><b>独立使用者·门槛水平。</b>能在绝大多数工作、学习或日常生活中常见的情景中自如应对，
+        能针对熟悉话题或个人感兴趣的主题<b>撰写简单连贯的文本</b>，可以描述经历、事件、愿望、计划，并能对观点和意图进行简单阐述和解释。</div>
+    </div>
+    <details>
+      <summary><span class="toggle-icon">▾</span>查看 B2–C2 级别</summary>
+      <div class="hidden-rungs">
+        <div class="rung">
+          <div class="lvl">B2</div>
+          <div class="desc">理解较复杂文本的主旨（含抽象话题），能与母语者流畅自然地交流，就多种话题产出清晰详尽的文本，能进行辩论和观点阐述。</div>
+        </div>
+        <div class="rung">
+          <div class="lvl">C1</div>
+          <div class="desc">流利、自如地理解较长且复杂的文本，能识别隐含意义，表达自如、几乎不费力，能在社交、学术、职业场合灵活准确地使用语言。</div>
+        </div>
+        <div class="rung">
+          <div class="lvl">C2</div>
+          <div class="desc">几乎能理解所听所读的一切内容，表达自如、精准，能区分细微的语义差别，适用于高度专业化的学术和职业场合。</div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 2. Estructura general -->
+  <h2 class="section-title" id="estructura"><span class="num">2</span>考试整体结构和形式</h2>
+  <p style="font-size:13.5px;color:var(--gris)">DELE B1 考试由 <b>四大板块（pruebas）</b>组成，分别考察读、听、写、说四项技能。每部分各占总分的 <b>25%</b>，共 100 分。</p>
+
+  <div class="grid4">
+    <div class="prueba-card p1">
+      <div class="icon">📖</div>
+      <div class="prueba-label">Prueba 1</div>
+      <div class="title">阅读理解</div>
+      <div class="meta">Comprensión de lectura<br><b>70</b> 分钟 · <b>5</b> 个 tarea · <b>30</b> 题</div>
+    </div>
+    <div class="prueba-card p2">
+      <div class="icon">🎧</div>
+      <div class="prueba-label">Prueba 2</div>
+      <div class="title">听力理解</div>
+      <div class="meta">Comprensión auditiva<br><b>40</b> 分钟 · <b>5</b> 个 tarea · <b>30</b> 题</div>
+    </div>
+    <div class="prueba-card p3">
+      <div class="icon">✍️</div>
+      <div class="prueba-label">Prueba 3</div>
+      <div class="title">书面表达</div>
+      <div class="meta"><span class="nowrap-text">Expresión e interacción escritas</span><br><b>60</b> 分钟 · <b>2</b> 个 tarea</div>
+    </div>
+    <div class="prueba-card p4">
+      <div class="icon">🗣️</div>
+      <div class="prueba-label">Prueba 4</div>
+      <div class="title">口语表达</div>
+      <div class="meta"><span class="nowrap-text">Expresión e interacción orales</span><br><b>15</b> (+15) 分钟 · <b>4</b> 个 tarea</div>
+    </div>
+  </div>
+
+  <div class="callout gray">
+    <b>考试形式说明：</b><br>
+    Prueba 1（阅读）和 Prueba 2（听力）合并在同一本试题册中进行，须用<b>铅笔</b>填涂答题卡，<b>由机器自动评分</b>。<br>
+    Prueba 3（写作）和 Prueba 4（口语）为<b>主观题</b>，由考官根据评分量表（escala）<b>人工评分</b>。<br>
+  </div>
+
+  <!-- 3. Detalle de cada prueba -->
+  <h2 class="section-title" id="detalle"><span class="num">3</span>详细题型</h2>
+
+  <!-- PRUEBA 1 -->
+  <h3 class="sub-title" id="lectura">📖 Prueba 1 · Comprensión de lectura（阅读理解）</h3>
+  <div class="strip">
+    <div class="item"><div class="v">70 min</div><div class="k">总时长</div></div>
+    <div class="item"><div class="v">5</div><div class="k">Tareas</div></div>
+    <div class="item"><div class="v">30</div><div class="k">题目总数</div></div>
+    <div class="item"><div class="v">25%</div><div class="k">占总分比重</div></div>
+    <div class="item"><div class="v">1分/题</div><div class="k">答对1分，答错不得分</div></div>
+  </div>
+  <p style="font-size:15px;color:var(--black)"><b>注意事项：</b>须用<b>铅笔</b>填涂独立答题卡（Hoja de respuestas）。</p>
+
+  <div class="tarea tarea-p1">
+    <div class="head"><span class="chip chip-p1">Tarea 1</span><span class="titulo">短文与人物陈述匹配</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">文本类型</div>广告、海报、私人留言和通知等，涉及个人、公共、教育或职业领域。每篇约 40–60 字。</div>
+      <div class="col"><div class="lab">题目形式</div>阅读 10 篇短文（含1个示例），将其中 6 篇分别与 6 个任务的陈述配对。</div>
+      <div class="col"><div class="lab">考察能力</div>提取短文的主旨大意，识别其中的具体特定信息。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0001.jpg" alt="原题扫描 1">
+        <img src="modelo/modelo_page-0002.jpg" alt="原题扫描 2">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p1">
+    <div class="head"><span class="chip chip-p1">Tarea 2</span><span class="titulo">信息性文本选择题</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">文本类型</div>公共或教育领域的信息性文本（如报刊新闻、深度报道、社会纪实文章等），约 400–450 字。</div>
+      <div class="col"><div class="lab">题目形式</div>阅读一篇较长的信息性文本，回答 6 道三选一单选题(A/B/C)。</div>
+      <div class="col"><div class="lab">考察能力</div>对长篇文本核心要点的把握，以及细节信息的挖掘能力。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0003.jpg" alt="原题扫描 3">
+        <img src="modelo/modelo_page-0004.jpg" alt="原题扫描 4">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p1">
+    <div class="head"><span class="chip chip-p1">Tarea 3</span><span class="titulo">多篇文本与陈述匹配</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">文本类型</div>旅游指南、亲身经历、新闻、日记、传记、招聘信息等公共领域文本。共 3 篇，每篇约 100–120 字。</div>
+      <div class="col"><div class="lab">题目形式</div>阅读 3 篇文本，将其与 6 个陈述句或问题配对。</div>
+      <div class="col"><div class="lab">考察能力</div>在相似度较高的文本中进行精确定位和筛选，能够横向对比特定信息。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0005.jpg" alt="原题扫描 5">
+        <img src="modelo/modelo_page-0006.jpg" alt="原题扫描 6">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p1">
+    <div class="head"><span class="chip chip-p1">Tarea 4</span><span class="titulo">文本填空</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">文本类型</div>目录、说明书、简单食谱、建议、叙事性文本等。约 400–450 字。</div>
+      <div class="col"><div class="lab">题目形式</div>阅读一篇不完整的文本，从 8 个备选片段中选出 6 个补全文本。</div>
+      <div class="col"><div class="lab">考察能力</div>对语篇宏观结构逻辑的感知，对句子间衔接、连贯和照应关系的重构。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0007.jpg" alt="原题扫描 7">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p1">
+    <div class="head"><span class="chip chip-p1">Tarea 5</span><span class="titulo">书信体完形填空</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">文本类型</div>一篇书信或邮件体文本（如私人书信、正式申请信、咨询邮件等）。约 150–200 字。</div>
+      <div class="col"><div class="lab">题目形式</div>阅读一篇留有 6 处空格的文本，针对每处空缺，进行三选一单选填空。</div>
+      <div class="col"><div class="lab">考察能力</div>在具体的书面交流语境中，对日常语法结构、时态、介词搭配以及核心词汇的驾驭。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0008.jpg" alt="原题扫描 8">
+      </div>
+    </div>
+  </div>
+
+  <!-- PRUEBA 2 -->
+  <h3 class="sub-title" id="auditiva">🎧 Prueba 2 · Comprensión auditiva（听力理解）</h3>
+  <div class="strip">
+    <div class="item"><div class="v">40 min</div><div class="k">总时长</div></div>
+    <div class="item"><div class="v">5</div><div class="k">Tareas</div></div>
+    <div class="item"><div class="v">30</div><div class="k">题目总数</div></div>
+    <div class="item"><div class="v">25%</div><div class="k">占总分比重</div></div>
+    <div class="item"><div class="v">1分/题</div><div class="k">答对1分，答错不得分</div></div>
+  </div>
+  <p style="font-size:15px;color:var(--black)"><b>注意事项：</b>每段音频均播放<b>两次</b>，音频播放前后留有作答时间。</p>
+
+  <div class="tarea tarea-p2">
+    <div class="head"><span class="chip chip-p2">Tarea 1</span><span class="titulo">宣传/信息类短音频理解</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">音频类型</div>六段互相独立的简短独白（如广播、广告、电话留言、温馨提示等）。每段约 40–60 字。</div>
+      <div class="col"><div class="lab">题目形式</div>听 6 段短音频，完成三选一单选题。每段音频对应一道题目。</div>
+      <div class="col"><div class="lab">考察能力</div>在嘈杂的环境中，快速抓取录音核心意图和特定关键信息。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0009.jpg" alt="原题扫描 9">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p2">
+    <div class="head"><span class="chip chip-p2">Tarea 2</span><span class="titulo">长篇独白理解</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">音频类型</div>讲述个人经历的长篇独白（如个人生活经历叙述、故事分享、旅行体验讲述等），约 400–450 字。</div>
+      <div class="col"><div class="lab">题目形式</div>听一段独白，完成 6 道三选一单选题。</div>
+      <div class="col"><div class="lab">考察能力</div>理解长篇独白的主旨大意，提取其中的关键核心信息，捕捉特定叙事细节。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0010.jpg" alt="原题扫描 10">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p2">
+    <div class="head"><span class="chip chip-p2">Tarea 3</span><span class="titulo">新闻节目理解</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">音频类型</div>广播或电视新闻节目，包含 6 条不同主题的简短时事新闻，总共约 350–400 字。</div>
+      <div class="col"><div class="lab">题目形式</div>听 6 条新闻，完成 6 道三选一单选题。每条新闻对应一道题目。</div>
+      <div class="col"><div class="lab">考察能力</div>对标准化媒体播音语篇宏观大意的理解，在快速语流中分辨各个简讯的基本事实。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0011.jpg" alt="原题扫描 11">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p2">
+    <div class="head"><span class="chip chip-p2">Tarea 4</span><span class="titulo">非正式短对话/独白与陈述配对</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">音频类型</div>六段围绕<b>同一主题</b>展开的非正式独白或对话。每段约 50–70 字。</div>
+      <div class="col"><div class="lab">题目形式</div>听 6 段音频，从给出的 9 个句子或观点中，选出 6 个与 6 位说话人配对。</div>
+      <div class="col"><div class="lab">考察能力</div>在特定主题讨论中，辨析、提炼不同说话人的主旨、核心看法和基本态度。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0012.jpg" alt="原题扫描 12">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p2">
+    <div class="head"><span class="chip chip-p2">Tarea 5</span><span class="titulo">对话与说话人配对</span><span class="items">共 6 题</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">音频类型</div>两人之间的非正式日常或公共事务对话，约 250–300 字。</div>
+      <div class="col"><div class="lab">题目形式</div>听一段对话，将给出的 6 个陈述与说话人（男性/女性/无）进行配对。</div>
+      <div class="col"><div class="lab">考察能力</div>在双人对话中，捕捉说话者交替发言时的特定细节信息及观点归属。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0013.jpg" alt="原题扫描 13">
+      </div>
+    </div>
+  </div>
+
+  <!-- PRUEBA 3 -->
+  <h3 class="sub-title" id="escritas">✍️ Prueba 3 · Expresión e interacción escritas（书面表达与互动）</h3>
+  <div class="strip">
+    <div class="item"><div class="v">60 min</div><div class="k">总时长</div></div>
+    <div class="item"><div class="v">2</div><div class="k">Tareas</div></div>
+    <div class="item"><div class="v">230–270</div><div class="k">总写作词数</div></div>
+    <div class="item"><div class="v">25%</div><div class="k">占总分比重</div></div>
+    <div class="item"><div class="v">40% / 60%</div><div class="k">综合印象分 / 分项评分权重</div></div>
+  </div>
+
+  <div class="tarea tarea-p3">
+    <div class="head"><span class="chip chip-p3">Tarea 1</span><span class="titulo">互动写作（书信/留言/邮件）</span><span class="items">100–120 词</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目体裁</div>阅读一段约 75–85 字的通知或邮件后，撰写一篇 100–120 词的回应文本。</div>
+      <div class="col"><div class="lab">考察能力</div>在书面互动中，针对日常事务进行回应或提供建议，并进行简单描述与叙事。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0014.jpg" alt="原题扫描 14">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p3">
+    <div class="head"><span class="chip chip-p3">Tarea 2</span><span class="titulo">叙事性写作（二选一）</span><span class="items">130–150 词</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目体裁</div>阅读一小段 40-50 字的新闻或博客后，撰写一篇 130-150 字的描述性或叙事性文本（随笔、日记、传记等）。<br><b>从两个话题中任选其一</b>。</div>
+      <div class="col"><div class="lab">考察能力</div>主动组织语篇、讲述个人经历、分享情感、表达观点并阐述原因。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0015.jpg" alt="原题扫描 15">
+      </div>
+    </div>
+  </div>
+
+  <h4 style="margin:34px 0 10px;font-size:20px;">📝 评分标准（Escala analítica）</h4>
+  <p style="font-size:15px;color:var(--black)">评分由考官从<b>四个维度</b>各打 0–3 分：<b>体裁适配度、连贯性、正确性、词汇及语言范围</b>。这四项分析评分占最终成绩的 <b>60%</b>.
+  <br>同时还有一份独立的<b>综合印象分（Escala holística）</b>，占最终成绩的 <b>40%</b>.</p>
+
+  <div class="ladder">
+    <details>
+      <summary><span class="toggle-icon">▼</span> 查看详细评分标准</summary>
+      <div class="hidden-rungs">
+      <div class="rubric-box">
+      <div class="subhead">体裁契合度 · Adecuación al género discursivo</div>
+      <table>
+        <tr class="b3"><td class="pts">3分 · 优秀</td><td>能写出清晰精准的文本，就各种话题都能补充细节；撰写书信、留言等时能使用与语境相符的语域，能有效完成所有的写作要点。</td></tr>
+        <tr class="b2"><td class="pts">2分 · 达标 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11.5px">B1 水平线</span></td><td>
+            能写出清晰简明的文本。书信、留言、便条等能遵循基本的体裁规范（开头结尾等），并使用基本礼貌用语（问候、道别等）。
+            能清楚展开绝大部分写作要点，即使个别要点缺失或处理不当。</td></tr>
+        <tr class="b1"><td class="pts">1分 · 未达标</td><td>只能就切身环境或日常生活方面写出非常简短基础的文本，信息有时杂乱或不完整，需要重读才能理解。
+            撰写书信、留言、便条时只能使用最常见的功能表达、基本礼貌规范或问候用语（如"muchas gracias""hola, ¿cómo estás?"），或缺少重要细节（如书信中的问候或道别）。
+            只提及部分写作要点，或展开不充分。</td></tr>
+        <tr class="b0"><td class="pts">0分 · 严重未达标</td><td>产出的文本仅限于关于自己或身边人、话题的一系列孤立简单句子，有时无法理解。
+            在问候、道别、自我介绍等日常套语等表达上出现错误。缺少重要细节。文本不遵循写作要点或严重偏离，字数不达标（Tarea1少于 70 词；Tarea2少于 90 词）。</td></tr>
+      </table>
+      <div class="subhead">逻辑连贯性 · Coherencia</div>
+      <table>
+        <tr class="b3"><td class="pts">3分</td><td>文本清晰、连贯、结构合理，能有限但恰当地运用衔接手段串联句子，形成有计划的语篇，并考虑到对读者产生的效果；
+            能综合、评价并变换其他来源的信息，尝试新的搭配和表达，标明观点之间的关系。标点使用恰当，可能有个别错误。</td></tr>
+        <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>文本简短且有衔接，通过简单要素的排列组织，使用信息组织词（primero、luego、después）及
+            常用连接词（y、también、por eso、entonces、pero、porque…），结构上可能存在一定不足或局限。</td></tr>
+        <tr class="b1"><td class="pts">1分</td><td>用非常简单基础的连接词（y、pero、porque）连接一系列简短句子，语篇有时是杂乱或不完整的，需要重读才能理解。</td></tr>
+        <tr class="b0"><td class="pts">0分</td><td>文本仅限于一系列用最基础的连接词（y、pero）串联的单词或词组，语篇缺乏能让人跟随论证的组织结构。</td></tr>
+      </table>
+      <div class="subhead">语法正确性 · Corrección</div>
+      <table>
+        <tr class="b3"><td class="pts">3分</td><td>在日常情境中保持良好的语法控制，可能出现个别小错误，但不造成误解。拼写基本正确，可能因母语影响在低频词汇上出现个别错误。</td></tr>
+        <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>对满足即时需求及个人兴趣话题所需的基本语言要素和常用结构有合理掌握。拼写可能有个别错误，但不影响主要信息的传达。</td></tr>
+        <tr class="b1"><td class="pts">1分</td><td>使用简单语法结构，会犯基础错误，但只要信息与常见交际情境相关，仍能被理解。存在较严重的拼写错误，个别情况下会影响理解。</td></tr>
+        <tr class="b0"><td class="pts">0分</td><td>对基础简单的语法结构和句型掌握有限。存在大量语法和拼写错误（性数一致、动词人称选择等），影响理解并需反复重读。</td></tr>
+      </table>
+      <div class="subhead">词汇丰富度 · Alcance</div>
+      <table>
+        <tr class="b3"><td class="pts">3分</td><td>掌握较为丰富的词汇，包含一些习语和口语表达，能描述不可预测的情况，较为准确地说明观点或问题要点。
+            可以就抽象和文化话题表达想法，可能有少量词汇不准确之处，但不影响理解。</td></tr>
+        <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>拥有足够词汇应对贴近日常的交流，可用于请求信息、表达评价、愿望和给出指示，使用更复杂结构或词汇时可能出错。</td></tr>
+        <tr class="b1"><td class="pts">1分</td><td>词汇有限，用于满足非常具体和日常需求的基本信息传递，不足以充分传达信息，存在不影响交流的不准确表达。</td></tr>
+        <tr class="b0"><td class="pts">0分</td><td>仅使用非常基础的词汇和孤立短语，不足以传递所需信息或实现交流，存在持续的词汇不准确和其他语言干扰。</td></tr>
+      </table>
+      <div class="subhead">综合印象分 · Escala holística</div>
+      <table>
+        <tr class="b3"><td class="pts">3分</td><td>在所需信息基础上补充细节，使信息的组织和表达大大超越目标要求。
+            语言资源足以清晰准确地进行描述、表达观点看法并展开论述，几乎没有明显局限，文本清晰详尽。</td></tr>
+        <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>以可理解的方式提供所需信息并成功传达信息。在日常话题的信息交流中表达清晰，若话题较抽象，可能出现犹豫或缺少细节。
+            语言资源足以恰当表达日常情境和个人兴趣话题，尽管有一些错误或重复，仍能构建简单的句子，关键词表达清晰易懂。</td></tr>
+        <tr class="b1"><td class="pts">1分</td><td>以简单方式提供部分所需信息，简短且不够清晰，不足以传达信息。
+            语言资源有限，由句法结构和背诵表达构成，存在基础性错误影响理解，个别情况下整体思路也不清晰。</td></tr>
+        <tr class="b0"><td class="pts">0分</td><td>仅提供部分数据，不足以传达信息。文本仅限于一系列非常简短简单的句子，语篇混乱且错误频繁，妨碍信息理解。</td></tr>
+      </table>
+      </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- PRUEBA 4 -->
+  <h3 class="sub-title" id="orales">🗣️ Prueba 4 · Expresión e interacción orales（口语表达与互动）</h3>
+  <div class="strip">
+    <div class="item"><div class="v">15 min</div><div class="k">考试时长</div></div>
+    <div class="item"><div class="v">15 min</div><div class="k">提前准备时间</div></div>
+    <div class="item"><div class="v">4</div><div class="k">Tareas</div></div>
+    <div class="item"><div class="v">25%</div><div class="k">占总分比重</div></div>
+    <div class="item"><div class="v">2位考官</div><div class="k">entrevistador + calificador</div></div>
+  </div>
+  <div class="callout gray">
+    考生有 <b>15 分钟准备时间</b>，可为 Tarea 1 和 Tarea 2 记笔记、写提纲供考试中参考。<br><br>
+    考场内有两位考官：<br>
+     <ul class="plain" style="margin-top:10px;">
+        <li><b>Entrevistador（面试官）· 权重 40%</b> — 负责提问、引导互动，推进任务进行。</li>
+        <li><b>Calificador（评分官）· 权重 60%</b> — 不参与对话互动，只在一旁安静打分。</li>
+    </ul>
+    面试官会给出一个<b>综合印象分</b>，覆盖全部四个 Tarea.<br>
+    而评分官则会从<b>四个维度分析评分</b>：「连贯性」「流畅度」「准确度」和「词汇量」。完整评分标准见本部分末尾【评分标准】板块。
+  </div>
+
+  <div class="tarea tarea-p4">
+    <div class="head"><span class="chip chip-p4">Tarea 1</span><span class="titulo">简短陈述展示（Presentación）</span><span class="items">2–3 分钟</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目形式</div>从<b>两个话题中任选其一</b>，就该话题或标题进行 2-3 分钟的简短独白展示，表达观点、描述经历或谈论愿望。</div>
+      <div class="col"><div class="lab">考察能力</div>口头语言组织能力和结构连贯性，能流利地阐述过往经历，表达愿望、机会、梦想以及个人观点。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0016.jpg" alt="原题扫描 16">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p4">
+    <div class="head"><span class="chip chip-p4">Tarea 2</span><span class="titulo">参与对话（Conversación）</span><span class="items">3–4 分钟</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目形式</div>就 Tarea 1 所陈述的话题或观点，与面试官展开约 3-4 分钟的即兴、自然的对话。</div>
+      <div class="col"><div class="lab">考察能力</div>在无直接准备的状态下，面对针对性提问时的听力理解、逻辑回应、观点辩护与互动交际。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0016.jpg" alt="原题扫描 16">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p4">
+    <div class="head"><span class="chip chip-p4">Tarea 3</span><span class="titulo">看图描述&对话</span><span class="items">2–3 分钟</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目形式</div>从面试官提供的两张照片中<b>任选其一</b>，先进行基础画面描述，随后与面试官围图片引申的话题展开对话。</div>
+      <div class="col"><div class="lab">考察能力</div>即兴的语言组织能力，对空间与人物的状态描述、假设猜测、以及联系自身生活进行引申谈话。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0017.jpg" alt="原题扫描 17">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarea tarea-p4">
+    <div class="head"><span class="chip chip-p4">Tarea 4</span><span class="titulo">情景模拟对话</span><span class="items">2–3 分钟</span></div>
+    <div class="row">
+      <div class="col"><div class="lab">题目形式</div>根据 Tarea 3 的照片和角色卡上的情境说明，与面试官进行一场模拟日常情景的对话。</div>
+      <div class="col"><div class="lab">考察能力</div>在具体和突发的现实情境中，灵活运用语言解决实际问题或达成协议。</div>
+    </div>
+    <div class="original">
+      <div class="tag-orig">例题</div>
+      <div class="imgs">
+        <img src="modelo/modelo_page-0018.jpg" alt="原题扫描 18">
+      </div>
+    </div>
+  </div>
+
+  <h4 style="margin:34px 0 10px;font-size:20px;">🎤 评分标准（Escala analítica）</h4>
+  <p style="font-size:15px;color:var(--black)">考官从<b>四个维度</b>各打 0–3 分：<b>连贯性、流利度、正确性、语言范围</b>。这四项评分占最终成绩的<b>60%</b>. <br>
+    同时还有一份独立的<b>综合印象分（Escala holística）</b>，占最终成绩的<b>40%</b>.</p>
+
+  <div class="ladder">
+    <details>
+      <summary><span class="toggle-icon">▼</span> 查看详细评分标准</summary>
+      <div class="hidden-rungs">    
+        <div class="rubric-box">
+          <div class="subhead">连贯性 · Coherencia</div>
+          <table>
+            <tr class="b3"><td class="pts">3分</td><td>语篇清晰连贯，能有限但恰当地运用衔接手段。若发言时间较长，可能对语篇的掌控稍有下降。能恰当地维持对话，与对话者积极配合。</td></tr>
+            <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>以简短简单的语句，用常见连接词（es que、por eso、además等）串联出线性的相关思路。能就日常话题进行简单对话，尽管有时需要澄清或复述对方部分内容以确认理解。</td></tr>
+            <tr class="b1"><td class="pts">1分</td><td>语篇有限，由词组和简单连接词（y、pero、porque）组成。需要对话者配合确认理解，才能回答简单问题和陈述。</td></tr>
+            <tr class="b0"><td class="pts">0分</td><td>语篇混乱，由孤立表述组成，几乎没有衔接成分。需要对话者频繁重复或改述其发言，回答也不总是切题。</td></tr>
+          </table>
+          <div class="subhead">流畅度 · Fluidez</div>
+          <table>
+            <tr class="b3"><td class="pts">3分</td><td>表达相对流畅。尽管在组织语篇时会遇到一些困难，产生停顿和"死胡同"，但仍能有效地继续下去。发音清晰易懂，但可能带有明显外国口音，偶有零星错误。</td></tr>
+            <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>连续、可理解地讲话，但明显能看出为规划语篇、思考恰当语法和词汇而产生的停顿。发音清晰易懂，但可能带有明显外国口音，偶有零星错误。</td></tr>
+            <tr class="b1"><td class="pts">1分</td><td>用非常简短的表达让人理解，停顿、最初的犹豫及重新表述较为明显。发音和吐字总体较为清晰易懂，但口音和偶发错误可能使理解需要一定努力。</td></tr>
+            <tr class="b0"><td class="pts">0分</td><td>只能使用非常简短、孤立且提前准备好的表达，需要大量停顿来寻找措辞、发出不太常用的词语音节及修正表达。发音和吐字只在记忆背诵的单词和句子中才准确，理解需要一定努力。</td></tr>
+          </table>
+          <div class="subhead">准确度 · Precisión</div>
+          <table>
+            <tr class="b3"><td class="pts">3分</td><td>语法控制相对较高，会犯一些不影响理解的错误，有时能自行纠正。</td></tr>
+            <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>对一系列简单结构（如陈述式时态、物主代词、动词 gustar、基础迂说法）有合理的掌握，会犯一些不影响理解的错误。</td></tr>
+            <tr class="b1"><td class="pts">1分</td><td>能正确使用一些简单结构，但系统性地犯一些基础错误，如时态混淆和性数不一致。</td></tr>
+            <tr class="b0"><td class="pts">0分</td><td>对简单结构及基础简短句型的掌握不足，例如现在时使用错误、主谓不一致以及用不定式代替变位动词。大量错误使交流非常困难。</td></tr>
+          </table>
+          <div class="subhead">词汇量 · Alcance</div>
+          <table>
+            <tr class="b3"><td class="pts">3分</td><td>语言资源能让考生描述各种情况，较为准确地说明观点或问题的要点，并就音乐、电影等一般性、抽象或文化话题表达想法。</td></tr>
+            <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>语言资源足够宽泛，可应对日常情境并进行表达，尽管在谈论家庭、兴趣爱好、工作、旅行和时事等话题时会有些犹豫并使用迂回说法。冒险使用超出把握的表达时会出现不准确和词汇错误。</td></tr>
+            <tr class="b1"><td class="pts">1分</td><td>有限的语言资源能让考生就个人话题及最切身的环境，在简单日常情境（基本需求、常见交易）中传递信息，但需要调整信息内容并寻找词汇，会出现不准确和词汇错误。</td></tr>
+            <tr class="b0"><td class="pts">0分</td><td>语言资源仅限于少量单词或背诵的表达方式，存在不准确、词汇错误或其他语言干扰，妨碍理解。</td></tr>
+          </table>
+          <div class="subhead">综合印象分 · Escala holística</div>
+          <table>
+            <tr class="b3"><td class="pts">3分</td><td>在所需信息基础上补充相关的解释、论据或例子。拥有足够的语言资源，能从容应对所设情境，尽管会犯一些错误。能恰当地进行对话并交流信息，主动确认对详细信息的理解并与对话者配合。</td></tr>
+            <tr class="b2"><td class="pts">2分 ✓<br><span style="font-weight:400;color:var(--gris);font-size:11px">B1 水平线</span></td><td>提供完成任务交际目标所需的信息。语言资源简单，能应对所设情境，所犯错误不影响思想的传达。能进行对话并交流信息，尽管可能需要一些澄清，并复述对方部分内容以确认双方理解一致。</td></tr>
+            <tr class="b1"><td class="pts">1分</td><td>虽能进行简单的描述和展示，但提供的信息不足以完成任务的交际目标。语言资源有限，能就个人话题及最切身环境在简单日常情境中传递信息，但需调整信息内容、寻找词汇，并反复出现基础性错误。只有在对话者提供帮助的情况下才能进行对话和交流信息。</td></tr>
+            <tr class="b0"><td class="pts">0分</td><td>几乎不提供信息，因而未能完成任务的交际目标。语言局限造成表达困难。需要对话者重复或改述其发言，并以较慢语速帮助其组织想法。</td></tr>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <h4 style="margin:34px 0 10px;font-size:20px;">⚖️ 打分权重</h4>
+  <p style="font-size:15px;color:var(--black)">口语总分由两位考官加权得出：<br>
+    <ul class="plain" style="margin-top:10px;">
+      <li><b>Calificador（评分官）· 权重 60%</b> — 对每个 Tarea 的<b>四项维度</b>进行分析评分</li>
+      <li><b>Entrevistador（面试官）· 权重 40%</b> — 对<b>整场表现给出一个整体印象分</b>（不区分 Tarea）。</li>
+    </ul>
+  </p>
+
+  <div class="weight-box">
+    <table class="weight">
+      <tr>
+        <th style="text-align:left;">考官</th>
+        <th style="text-align:left;">评分范围</th>
+        <th>连贯性<br>25%</th>
+        <th>流畅度<br>25%</th>
+        <th>准确度<br>25%</th>
+        <th>词汇量<br>25%</th>
+      </tr>
+      <tr>
+        <td class="rowlab" rowspan="2">Calificador<br>评分官<br><span style="font-weight:400;color:var(--gris);font-size:14x">60%</span></td>
+        <td class="rowlab">Tarea 1 + Tarea 2 (50%)</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+      </tr>
+      <tr>
+        <td class="rowlab">Tarea 3 + Tarea 4 (50%)</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+        <td>7.50%</td>
+      </tr>
+      <tr>
+        <td class="rowlab">Entrevistador<br>面试官<br><span style="font-weight:400;color:var(--gris);font-size:11.5px">40%</span></td>
+        <td class="rowlab">整个 Prueba</td>
+        <td colspan="4" style="text-align:center;">整体印象分 40%</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 4. Sistema de calificación global -->
+  <h2 class="section-title" id="calificacion"><span class="num">4</span>分数折算与通过要求</h2>
+  <h3 class="sub-title no-top-gap">客观题（阅读 / 听力）</h3>
+  <div class="callout green">
+    每题答对得 <b>1 分</b>，答错<b>不得分</b>。  <b>最终成绩 =（答对题数 × 25）÷ 题目总数</b><br>
+    例：阅读理解 30 题中答对 20 题（10 题错） → <b>20 × 25 ÷ 30 = 16.67 分</b>。
+  </div>
+
+  <h3 class="sub-title large-top-gap">主观题（写作 / 口语）转换公式</h3>
+  <p style="font-size:15px;color:var(--black)">考官打出的 0–3 分「直接分」（经各分量表加权后得出）需按比例换算为 25 分制：</p>
+  <div class="formula">
+    <div style="font-size:15px;color:var(--black)"><b>官方折算公式:</b></div>
+    <div class="f">最终成绩 =（直接分 × 25）÷ 3</div>
+    <div style="font-size:14px;color:var(--gris)"><b>应用实例说明:</b><br>
+      若考生获得的书面表达直接分为 2 分，折算为 25 分制则是：<b>( 2 × 25 ) ÷ 3 = 16.67 分</b></div>
+  </div>
+  <ul class="plain">
+    <li><b>写作：</b>综合印象分占 40%，四项分析评分（体裁契合度、连贯性、准确度、词汇量）占 60%.</li>
+    <li><b>口语：</b>综合印象分占 40%，四项分析评分（流畅度、连贯性、准确度、词汇量）占 60%.</li>
+  </ul>
+
+  <h3 class="sub-title large-top-gap">🏆 Apto 通过指标</h3>
+  <p style="font-size:15px;color:var(--black)">DELE 考试不看单科及格，而是将四个 Prueba 分为两个 Grupo，<b>每个 Grupo 的及格线为 30 分（满分 50 分）</b>。任何一个 Grupo 低于 30 分，都算作 No apto。</p>
+
+  <div class="group-row">
+  <div class="group-box group1">
+    <h4>📘 Grupo 1（读写能力）</h4>
+    <div class="bars">
+      <div class="bar"><div class="n">25</div><div class="t">Comprensión de lectura</div></div>
+      <div class="group-plus">+</div>
+      <div class="bar"><div class="n">25</div><div class="t">Expresión e interacción escritas</div></div>
+    </div>
+    <p style="font-size:14px;margin:10px 0 0;color:var(--gris)"><b>※ 示例:</b><br>阅读 11.00 分 + 写作 14.58 分 = 25.58 分 (未通过)</p>
+  </div>
+
+  <div class="group-box group2">
+    <h4>📙 Grupo 2（听说能力）</h4>
+    <div class="bars">
+      <div class="bar"><div class="n">25</div><div class="t">Comprensión auditiva</div></div>
+      <div class="group-plus">+</div>
+      <div class="bar"><div class="n">25</div><div class="t">Expresión e interacción orales</div></div>
+    </div>
+    <p style="font-size:14px;margin:10px 0 0;color:var(--gris)"><b>※ 示例:</b><br>听力 13.00 分 + 口语 10.21 分 = 23.21 分 (未通过)</p>
+  </div>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-head"><span class="callout-icon">⚠️</span><span class="callout-title">注意：</span></div>
+    <div class="callout-body">两个 Grupo必须 <b>同时达到 30 分</b>才能获得 <b>Apto</b>。<br>
+    只要有一个 Grupo 未达标，总成绩即为 <b>No apto</b>——即使另一个 Grupo 分数很高也无法弥补。<br></div>
+  </div>
+
+  <div class="footer-note">
+    内容整理自 Instituto Cervantes 官方文件《Guía del examen DELE B1》（© 2014, NIPO: 503-14-010-3）
+  </div>
+
+  </div>
+
+  <div class="navbar">
+    <div class="nav-title">快速跳转</div>
+    <a href="#nivel">① B1 水平要求</a>
+    <a href="#estructura">② 考试结构</a>
+    <a href="#detalle">③ 详细题型</a>
+    <a class="sub" href="#lectura">📖 阅读理解</a>
+    <a class="sub" href="#auditiva">🎧 听力理解</a>
+    <a class="sub" href="#escritas">✍️ 书面表达</a>
+    <a class="sub" href="#orales">🗣️ 口语表达</a>
+    <a href="#calificacion">④ 通过机制</a>
+  </div>
+
+</div>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+<script>
+  document.querySelectorAll('.original img').forEach(function(img){
+    img.addEventListener('click', function(){
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').style.display = 'flex';
+    });
+  });
+</script>
+
+
+</body>
+</html>
